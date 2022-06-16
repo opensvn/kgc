@@ -28,8 +28,16 @@ func New() *Kgc {
 	}
 }
 
+func (k *Kgc) GetSignMasterPublicKey() *sm9.SignMasterPublicKey {
+	return k.signMasterKey.Public()
+}
+
 func (k *Kgc) GenerateUserSignKey(uid []byte, hid byte) (*sm9.SignPrivateKey, error) {
 	return k.signMasterKey.GenerateUserKey(uid, hid)
+}
+
+func (k *Kgc) GetEncryptMasterPublicKey() *sm9.EncryptMasterPublicKey {
+	return k.encryptMasterKey.Public()
 }
 
 func (k *Kgc) GenerateUserEncryptKey(uid []byte, hid byte) (*sm9.EncryptPrivateKey, error) {
