@@ -31,3 +31,7 @@ func New() *Kgc {
 func (k *Kgc) GenerateUserSignKey(uid []byte, hid byte) (*sm9.SignPrivateKey, error) {
 	return k.signMasterKey.GenerateUserKey(uid, hid)
 }
+
+func (k *Kgc) GenerateUserEncryptKey(uid []byte, hid byte) (*sm9.EncryptPrivateKey, error) {
+	return k.encryptMasterKey.GenerateUserKey(uid, hid)
+}

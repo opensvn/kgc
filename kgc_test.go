@@ -34,3 +34,21 @@ func TestGenerateUserSignKey(t *testing.T) {
 		t.Error("userSignKey is nil")
 	}
 }
+
+func TestGenerateUserEncryptKey(t *testing.T) {
+	kgc := New()
+	if kgc == nil {
+		t.Error("kgc is nil")
+	}
+
+	uid := []byte("opensvn")
+	hid := byte(0x01)
+	userEncryptKey, err := kgc.GenerateUserEncryptKey(uid, hid)
+	if err != nil {
+		t.Error(err)
+	}
+
+	if userEncryptKey == nil {
+		t.Error("userSignKey is nil")
+	}
+}
