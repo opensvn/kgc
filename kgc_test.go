@@ -14,11 +14,11 @@ func TestNewKgc(t *testing.T) {
 		return
 	}
 
-	if kgc.EncryptMasterKey == nil {
+	if kgc.EncryptMasterPrivateKey == nil {
 		t.Error("kgc.encryptMasterKey is nil")
 	}
 
-	if kgc.SignMasterKey == nil {
+	if kgc.SignMasterPrivateKey == nil {
 		t.Error("kgc.signMasterKey is nil")
 	}
 }
@@ -215,11 +215,11 @@ func TestLoad(t *testing.T) {
 		return
 	}
 
-	if kgc.EncryptMasterKey == nil {
+	if kgc.EncryptMasterPrivateKey == nil {
 		t.Error("EncryptMasterKey is nil")
 	}
 
-	if kgc.SignMasterKey == nil {
+	if kgc.SignMasterPrivateKey == nil {
 		t.Error("SignMasterKey is nil")
 	}
 }

@@ -10,24 +10,24 @@ import (
 )
 
 type Kgc struct {
-	EncryptMasterKey *sm9.EncryptMasterPrivateKey
-	SignMasterKey    *sm9.SignMasterPrivateKey
+	EncryptMasterPrivateKey *sm9.EncryptMasterPrivateKey
+	SignMasterPrivateKey    *sm9.SignMasterPrivateKey
 }
 
 func New() (*Kgc, error) {
-	encryptMasterKey, err := sm9.GenerateEncryptMasterKey(rand.Reader)
+	encryptMasterPriKey, err := sm9.GenerateEncryptMasterKey(rand.Reader)
 	if err != nil {
 		return nil, err
 	}
 
-	signMasterKey, err := sm9.GenerateSignMasterKey(rand.Reader)
+	signMasterPriKey, err := sm9.GenerateSignMasterKey(rand.Reader)
 	if err != nil {
 		return nil, err
 	}
 
 	return &Kgc{
-		EncryptMasterKey: encryptMasterKey,
-		SignMasterKey:    signMasterKey,
+		EncryptMasterPrivateKey: encryptMasterPriKey,
+		SignMasterPrivateKey:    signMasterPriKey,
 	}, nil
 }
 
@@ -43,8 +43,8 @@ func Load(hexEncryptKey, hexSignKey string) (*Kgc, error) {
 	}
 
 	return &Kgc{
-		EncryptMasterKey: encryptMasterPriKey,
-		SignMasterKey:    signMasterPriKey,
+		EncryptMasterPrivateKey: encryptMasterPriKey,
+		SignMasterPrivateKey:    signMasterPriKey,
 	}, nil
 }
 
@@ -83,17 +83,17 @@ func bigFromHex(hex string) (*big.Int, error) {
 }
 
 func (k *Kgc) GetSignMasterPublicKey() *sm9.SignMasterPublicKey {
-	return k.SignMasterKey.Public()
+	return k.SignMasterPrivateKey.Public()
 }
 
 func (k *Kgc) GenerateUserSignKey(uid []byte, hid byte) (*sm9.SignPrivateKey, error) {
-	return k.SignMasterKey.GenerateUserKey(uid, hid)
+	return k.SignMasterPrivateKey.GenerateUserKey(uid, hid)
 }
 
 func (k *Kgc) GetEncryptMasterPublicKey() *sm9.EncryptMasterPublicKey {
-	return k.EncryptMasterKey.Public()
+	return k.EncryptMasterPrivateKey.Public()
 }
 
 func (k *Kgc) GenerateUserEncryptKey(uid []byte, hid byte) (*sm9.EncryptPrivateKey, error) {
-	return k.EncryptMasterKey.GenerateUserKey(uid, hid)
+	return k.EncryptMasterPrivateKey.GenerateUserKey(uid, hid)
 }
