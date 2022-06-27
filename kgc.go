@@ -7,8 +7,8 @@ import (
 )
 
 type Kgc struct {
-	encryptMasterKey *sm9.EncryptMasterPrivateKey
-	signMasterKey    *sm9.SignMasterPrivateKey
+	EncryptMasterKey *sm9.EncryptMasterPrivateKey
+	SignMasterKey    *sm9.SignMasterPrivateKey
 }
 
 func New() *Kgc {
@@ -23,23 +23,23 @@ func New() *Kgc {
 	}
 
 	return &Kgc{
-		encryptMasterKey: encryptMasterKey,
-		signMasterKey:    signMasterKey,
+		EncryptMasterKey: encryptMasterKey,
+		SignMasterKey:    signMasterKey,
 	}
 }
 
 func (k *Kgc) GetSignMasterPublicKey() *sm9.SignMasterPublicKey {
-	return k.signMasterKey.Public()
+	return k.SignMasterKey.Public()
 }
 
 func (k *Kgc) GenerateUserSignKey(uid []byte, hid byte) (*sm9.SignPrivateKey, error) {
-	return k.signMasterKey.GenerateUserKey(uid, hid)
+	return k.SignMasterKey.GenerateUserKey(uid, hid)
 }
 
 func (k *Kgc) GetEncryptMasterPublicKey() *sm9.EncryptMasterPublicKey {
-	return k.encryptMasterKey.Public()
+	return k.EncryptMasterKey.Public()
 }
 
 func (k *Kgc) GenerateUserEncryptKey(uid []byte, hid byte) (*sm9.EncryptPrivateKey, error) {
-	return k.encryptMasterKey.GenerateUserKey(uid, hid)
+	return k.EncryptMasterKey.GenerateUserKey(uid, hid)
 }
