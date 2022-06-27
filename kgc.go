@@ -11,21 +11,21 @@ type Kgc struct {
 	SignMasterKey    *sm9.SignMasterPrivateKey
 }
 
-func New() *Kgc {
+func New() (*Kgc, error) {
 	encryptMasterKey, err := sm9.GenerateEncryptMasterKey(rand.Reader)
 	if err != nil {
-		return nil
+		return nil, err
 	}
 
 	signMasterKey, err := sm9.GenerateSignMasterKey(rand.Reader)
 	if err != nil {
-		return nil
+		return nil, err
 	}
 
 	return &Kgc{
 		EncryptMasterKey: encryptMasterKey,
 		SignMasterKey:    signMasterKey,
-	}
+	}, nil
 }
 
 func (k *Kgc) GetSignMasterPublicKey() *sm9.SignMasterPublicKey {

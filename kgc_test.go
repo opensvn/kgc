@@ -8,9 +8,10 @@ import (
 )
 
 func TestNewKgc(t *testing.T) {
-	kgc := New()
-	if kgc == nil {
-		t.Error("kgc is nil")
+	kgc, err := New()
+	if err != nil {
+		t.Error(err)
+		return
 	}
 
 	if kgc.EncryptMasterKey == nil {
@@ -23,9 +24,10 @@ func TestNewKgc(t *testing.T) {
 }
 
 func TestGetSignMasterPublicKey(t *testing.T) {
-	kgc := New()
-	if kgc == nil {
-		t.Error("kgc is nil")
+	kgc, err := New()
+	if err != nil {
+		t.Error(err)
+		return
 	}
 
 	signMasterPublicKey := kgc.GetSignMasterPublicKey()
@@ -35,9 +37,10 @@ func TestGetSignMasterPublicKey(t *testing.T) {
 }
 
 func TestGenerateUserSignKey(t *testing.T) {
-	kgc := New()
-	if kgc == nil {
-		t.Error("kgc is nil")
+	kgc, err := New()
+	if err != nil {
+		t.Error(err)
+		return
 	}
 
 	uid := []byte("opensvn")
@@ -53,9 +56,10 @@ func TestGenerateUserSignKey(t *testing.T) {
 }
 
 func TestGetEncryptMasterPublicKey(t *testing.T) {
-	kgc := New()
-	if kgc == nil {
-		t.Error("kgc is nil")
+	kgc, err := New()
+	if err != nil {
+		t.Error(err)
+		return
 	}
 
 	encryptMasterPublicKey := kgc.GetEncryptMasterPublicKey()
@@ -65,9 +69,10 @@ func TestGetEncryptMasterPublicKey(t *testing.T) {
 }
 
 func TestGenerateUserEncryptKey(t *testing.T) {
-	kgc := New()
-	if kgc == nil {
-		t.Error("kgc is nil")
+	kgc, err := New()
+	if err != nil {
+		t.Error(err)
+		return
 	}
 
 	uid := []byte("opensvn")
@@ -83,9 +88,10 @@ func TestGenerateUserEncryptKey(t *testing.T) {
 }
 
 func TestEncryptAndDecrypt(t *testing.T) {
-	kgc1 := New()
-	if kgc1 == nil {
-		t.Error("kgc is nil")
+	kgc1, err := New()
+	if err != nil {
+		t.Error(err)
+		return
 	}
 
 	uid := []byte("alice")
@@ -96,9 +102,10 @@ func TestEncryptAndDecrypt(t *testing.T) {
 	}
 	masterPublicKey := kgc1.GetEncryptMasterPublicKey()
 
-	kgc2 := New()
-	if kgc2 == nil {
-		t.Error("kgc is nil")
+	kgc2, err := New()
+	if err != nil {
+		t.Error(err)
+		return
 	}
 
 	uid2 := []byte("bob")
@@ -145,9 +152,10 @@ func TestEncryptAndDecrypt(t *testing.T) {
 }
 
 func TestSignAndVerify(t *testing.T) {
-	kgc1 := New()
-	if kgc1 == nil {
-		t.Error("kgc is nil")
+	kgc1, err := New()
+	if err != nil {
+		t.Error(err)
+		return
 	}
 
 	uid := []byte("alice")
@@ -158,9 +166,10 @@ func TestSignAndVerify(t *testing.T) {
 	}
 	masterPublicKey := kgc1.GetSignMasterPublicKey()
 
-	kgc2 := New()
-	if kgc2 == nil {
-		t.Error("kgc is nil")
+	kgc2, err := New()
+	if err != nil {
+		t.Error(err)
+		return
 	}
 
 	uid2 := []byte("bob")
