@@ -206,3 +206,20 @@ func TestSignAndVerify(t *testing.T) {
 		t.Errorf("expected true, got false\n")
 	}
 }
+
+func TestLoad(t *testing.T) {
+	hexSignKey := "0130E78459D78545CB54C587E02CF480CE0B66340F319F348A1D5B1F2DC5F4"
+	hexEncryptKey := "02E65B0762D042F51F0D23542B13ED8CFA2E9A0E7206361E013A283905E31F"
+	kgc, err := Load(hexSignKey, hexEncryptKey)
+	if err != nil {
+		return
+	}
+
+	if kgc.EncryptMasterKey == nil {
+		t.Error("EncryptMasterKey is nil")
+	}
+
+	if kgc.SignMasterKey == nil {
+		t.Error("SignMasterKey is nil")
+	}
+}
